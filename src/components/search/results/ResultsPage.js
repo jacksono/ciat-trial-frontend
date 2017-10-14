@@ -132,7 +132,6 @@ handleSearch(event) {
 }
 }
   render() {
-    console.log("wll",this.state.allResults)
     return (
         <div>
 
@@ -351,45 +350,8 @@ handleSearch(event) {
 
           {(this.state.searched && !this.state.errorObservation) &&
           <div>
-          {3 > 0 ?
+          {this.state.allResults.length > 0 ?
             <div>
-          <Table striped className='table-rows'>
-                  <thead>
-                    <tr>
-                      <th>YEAR </th>
-                      <th>PLOT </th>
-                      <th>SHORT RAINS</th>
-                      <th>LONG RAINS</th>
-
-                    </tr>
-                  </thead>
-
-                  <tbody>
-                  {this.state.allResults.slice(2).map((result) => {
-                    if(this.state.years.length > 0){
-                      if(this.state.years.includes(Object.entries(result)[0][0].slice(7))){
-                    return (
-                      <tr key={Object.entries(result)[0][0] + Object.values(result)[0]['plot']}>
-                        <td>{Object.entries(result)[0][0].slice(7)}</td>
-                        <td>{Object.values(result)[0]['plot']}</td>
-                        <td>{Object.values(result)[0][this.refs.obs.value][0].toFixed(2)}</td>
-                        <td>{Object.values(result)[0][this.refs.obs.value][1].toFixed(2)}</td>
-                      </tr>
-                    )}}
-                    else if(Object.entries(result)[0][0].includes("Results")){
-                      return (
-                        <tr key={Object.entries(result)[0][0] + Object.values(result)[0]['plot']}>
-                          <td>{Object.entries(result)[0][0].slice(7)}</td>
-                          <td>{Object.values(result)[0]['plot']}</td>
-                          <td>{Object.values(result)[0][this.refs.obs.value][0].toFixed(2) }</td>
-                          <td>{Object.values(result)[0][this.refs.obs.value][1].toFixed(2)}</td>
-                        </tr>
-                      )
-                    }
-                  }
-                  )}
-                  </tbody>
-          </Table>
             <ResultTable results={this.state.allResults.slice(2)} obs={this.refs.obs.value}
                           years={this.state.years}/>
             </div>

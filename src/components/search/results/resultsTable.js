@@ -3,7 +3,6 @@ import ReactTable from 'react-table';
 import "react-table/react-table.css";
 
 const ResultTable = (props) => {
-    console.log("toskcs", props.results[0])
     let dataArray = [];
     props.results.map((data) => {
       if(props.years.length > 0){
@@ -17,7 +16,6 @@ const ResultTable = (props) => {
 
     }
   )
-  console.log("data", dataArray)
     const columns = [{
         id: 'year',
         Header: 'YEAR',
@@ -44,18 +42,15 @@ const ResultTable = (props) => {
       <div>
         <div className="">
           <div className="">
-            {2 > 0 ?
               <div>
-                <h3>RESULTS </h3>
+                <h3>Results For {props.obs} </h3>
               <ReactTable
                 className="-striped -highlight"
                 data={dataArray}
-                pageSize= {dataArray.length < 12 ? dataArray.length : 12}
+                pageSize= {dataArray.length < 12 ? dataArray.length + 1 : 12}
                 columns={columns}
               />
               </div>
-            : 0 > 1 ? 'No Results Found' : ''
-            }
           </div>
         </div>
 
