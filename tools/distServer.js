@@ -1,7 +1,9 @@
-import express from 'express';
-import path from 'path';
-import open from 'open';
-
+// import express from 'express';
+// import path from 'path';
+// import open from 'open';
+const open = require('open');
+const path = require('path');
+const express = require('express');
 /* eslint-disable no-console */
 
 const port = 8080;
