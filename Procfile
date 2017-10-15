@@ -1,1 +1,1 @@
-web: node tools/distServer.js
+web: npm run build
