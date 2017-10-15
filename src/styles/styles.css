@@ -181,3 +181,25 @@ input.btn-home:hover{
 .error{
   color: red;
 }
+.ReactTable .rt-thead .rt-resizable-header-content {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: white;
+    background-color: green;
+    font-size: 20px;
+}
+.ReactTable {
+    position: relative;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    border: 2px solid #15983A;
+}
+.ReactTable .rt-tbody .rt-td {
+    border-right: 1px solid rgba(0,0,0,0.02);
+    font-size: 20px;
+}
