@@ -49,6 +49,7 @@ const ResultTable = (props) => {
                 data={dataArray}
                 pageSize= {dataArray.length < 12 ? dataArray.length + 1 : 12}
                 columns={columns}
+                showPageSizeOptions={false}
               />
               </div>
           </div>

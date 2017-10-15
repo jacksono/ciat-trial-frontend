@@ -22,116 +22,137 @@ export default class PraisePage extends React.Component {
         observation:'',
         error: '',
         errorObservation:'',
-        years: []
+        years: [],
+        dataOptions: ["Select Rotation First"]
       };
 
       this.handleChange = this.handleChange.bind(this);
       this.handleSearch = this.handleSearch.bind(this);
       this.handleClear = this.handleClear.bind(this);
       this.select = this.select.bind(this);
+      this.getOptions = this.getOptions.bind(this);
 
     }
 
 
-select(event){
-  let targets = [];
-  $.each($(".selectpicker option:selected"), function(){
-  targets.push($(this).val());
-  });
-  this.setState({years: targets})
-}
-
-handleChange(event) {
-const { name, value } = event.target;
-if(name === 'obs'){
-  if(this.state.editValues.rot === 'M-M' && !this.refs.obs.value.includes("M")){
-    this.setState({errorObservation : "Invalid Observation for the selected Rotation"})
-  }
-  else if((this.state.editValues.rot === 'M-T' || this.state.editValues.rot === 'T-M') && this.refs.obs.value.includes("S")){
-    this.setState({errorObservation : "Invalid Observation for the selected Rotation"})
-  }
-  else if(this.state.editValues.rot === 'Intercr'  && this.refs.obs.value.includes("T")){
-    this.setState({errorObservation : "Invalid Observation for the selected Rotation"})
+  select(event){
+    let targets = [];
+    $.each($(".selectpicker option:selected"), function(){
+    targets.push($(this).val());
+    });
+    this.setState({years: targets})
   }
 
-else{
-  this.setState({errorObservation : ""})
-}
-}
-else if(!this.state.editValues.season){
-  this.setState({searched: false})
-}
-
-this.setState({
-  editValues: Object.assign({}, this.state.editValues, { [name]: value }),
-});
-}
-
-handleClear() {
-  this.setState({ editValues:{rep:'...',
-                              rot:'',
-                              obs:'',
-                              fym:'',
-                              nitro:'',
-                              phos:'',
-                              res:'',
-                              year:'',
-                              season:''},
-                  Results:{ MY:[],
-                                MAGB:[],
-                                TAGB:[],
-                                SY:[],
-                                SAGB:[]},
-                    plot_num:'',
-                    hasResults:false,
-                    searched:false,
-                    error : '',
-                    errorObservation:''
-
-  });
-}
-
-handleSearch(event) {
-  event.preventDefault()
-  this.setState({ Results:{ MY:[],
-                                MAGB:[],
-                                TAGB:[],
-                                SY:[],
-                                SAGB:[]},
-                    plot_num:'',
-                    hasResults:false,
-                    allResults: [],
-                    error:'',
-                    searched: false
-
-  });
-  let error = false
-  const res = this.refs.res.value
-  const fym = this.refs.fym.value
-  const rot = this.refs.rot.value
-  const nitro = this.refs.nitro.value
-  const phos = this.refs.phos.value
-  const rep = this.refs.rep.value
-  const observation = this.refs.obs.value
-  if( observation === "..." || res === "..." || fym === "..." || rot === "..." ||
-    nitro  === "..." || phos  === "..." || rep === "..." || this.state.errorObservation){
-    error = true
-    this.setState({ errorState: true,
-      error: 'ERROR: All selections are required'
-    })
-  }
-  if(!error){
-  apiCall(null, 'get', 'results/combination?res='+res+'&f='+fym+'&n='+nitro+'&p='+phos+'&rep='+rep+'&rot='+rot)
-  .then((response) => {
-    this.setState({searched: true})
-    if(response){
-      const resp = response[0]["Results"+2004]
-      this.setState({hasResults: true, allResults: response});
+  handleChange(event) {
+    const { name, value } = event.target;
+    if(name === 'rot'){
+    this.getOptions()
     }
-}).catch(error => (error));
-}
-}
+    if(name === 'obs'){
+      if(this.state.editValues.rot === 'M-M' && !this.refs.obs.value.includes("M")){
+        this.setState({errorObservation : "Invalid Observation for the selected Rotation"})
+      }
+      else if((this.state.editValues.rot === 'M-T' || this.state.editValues.rot === 'T-M') && this.refs.obs.value.includes("S")){
+        this.setState({errorObservation : "Invalid Observation for the selected Rotation"})
+      }
+      else if(this.state.editValues.rot === 'Intercr'  && this.refs.obs.value.includes("T")){
+        this.setState({errorObservation : "Invalid Observation for the selected Rotation"})
+      }
+
+    else{
+      this.setState({errorObservation : ""})
+    }
+    }
+    else if(!this.state.editValues.season){
+      this.setState({searched: false})
+    }
+
+    this.setState({
+      editValues: Object.assign({}, this.state.editValues, { [name]: value }),
+    });
+  }
+
+  handleClear() {
+    this.setState({ editValues:{rep:'...',
+                                rot:'...',
+                                fym:'...',
+                                nitro:'...',
+                                phos:'...',
+                                res:'...',
+                                year:'...',
+                                obs:'Select Rotation First',
+                                season:''},
+                    Results:{ MY:[],
+                                  MAGB:[],
+                                  TAGB:[],
+                                  SY:[],
+                                  SAGB:[]},
+                      plot_num:'',
+                      hasResults:false,
+                      searched:false,
+                      error : '',
+                      errorObservation:''
+
+                    });
+                  }
+
+  handleSearch(event) {
+    event.preventDefault()
+    this.setState({ Results:{ MY:[],
+                                  MAGB:[],
+                                  TAGB:[],
+                                  SY:[],
+                                  SAGB:[]},
+                      plot_num:'',
+                      hasResults:false,
+                      allResults: [],
+                      error:'',
+                      searched: false
+
+    });
+    let error = false
+    const res = this.refs.res.value
+    const fym = this.refs.fym.value
+    const rot = this.refs.rot.value
+    const nitro = this.refs.nitro.value
+    const phos = this.refs.phos.value
+    const rep = this.refs.rep.value
+    const observation = this.refs.obs.value
+    if( observation === "..." || res === "..." || fym === "..." || rot === "..." ||
+      nitro  === "..." || phos  === "..." || rep === "..." || this.state.errorObservation){
+      error = true
+      this.setState({ errorState: true,
+        error: 'ERROR: All selections are required'
+      })
+    }
+    if(!error){
+    apiCall(null, 'get', 'results/combination?res='+res+'&f='+fym+'&n='+nitro+'&p='+phos+'&rep='+rep+'&rot='+rot)
+    .then((response) => {
+      this.setState({searched: true})
+      if(response){
+        const resp = response[0]["Results"+2004]
+        this.setState({hasResults: true, allResults: response});
+      }
+      }).catch(error => (error));
+      }
+    }
+
+  getOptions(){
+    let data = []
+    if(this.refs.rot.value === 'M-M'){
+      data = ["...", "Maize_Y", "Maize_AGB"]
+    }
+    else if(this.refs.rot.value === 'M-T' || this.refs.rot.value === 'T-M'){
+      data = ["...", "Maize_Y", "Maize_AGB","Teph_AGB"]
+    }
+    else if(this.refs.rot.value === 'Intercr'){
+      data = ["...", "Maize_Y", "Maize_AGB", "Soy_Y", "Soy_AGB"]
+    }
+    this.setState({dataOptions : data })
+  }
   render() {
+
+    console.log("data",this.state.dataOptions)
     return (
         <div>
 
@@ -282,7 +303,7 @@ handleSearch(event) {
                     onChange={this.handleChange}
                   >
                     {
-                      ["...", "Maize_Y", "Maize_AGB", "Soy_Y", "Soy_AGB", "Teph_AGB",].map(option => (
+                      this.state.dataOptions.map(option => (
                         <option key={option} value={option}>{option}</option>
                       ))
                     }
