@@ -1,6 +1,4 @@
-// import express from 'express';
-// import path from 'path';
-// import open from 'open';
+
 const open = require('open');
 const path = require('path');
 const express = require('express');
