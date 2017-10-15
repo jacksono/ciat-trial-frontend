@@ -151,8 +151,6 @@ export default class PraisePage extends React.Component {
     this.setState({dataOptions : data })
   }
   render() {
-
-    console.log("data",this.state.dataOptions)
     return (
         <div>
 
