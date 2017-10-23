@@ -1,9 +1,7 @@
 #app {
   font: 14px 'Helvetica Neue', Helvetica, Arial, sans-serif;
   color: #4d4d4d;
-  min-width: 550px;
-  max-width: 850px;
-  margin: 0 auto
+
 }
 a.active {
   color: white;
@@ -14,7 +12,7 @@ a.active {
 .jumbo{
   margin: 20px;
   height: 80px;
-  width: 800px;
+
   background-color: #15983A;
 }
 
@@ -177,6 +175,7 @@ input.btn-home:hover{
 .select{
   text-align-last:center;
   font-size: 7px;
+
 }
 .error{
   color: red;
@@ -202,4 +201,14 @@ input.btn-home:hover{
 .ReactTable .rt-tbody .rt-td {
     border-right: 1px solid rgba(0,0,0,0.02);
     font-size: 20px;
+}
+.obs{
+  position: relative;
+  left: 50%;
+  transform: translateX(-95%);
+}
+.buttons{
+  position: relative;
+  left: 50%;
+  transform: translateX(-15%);
 }

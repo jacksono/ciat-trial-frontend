@@ -14,8 +14,9 @@ const ResultTable = (props) => {
         dataArray.push(data)
       }
 
-    }
-  )
+    })
+    dataArray.push({combintion:props.combintion})
+  
     const columns = [{
         id: 'year',
         Header: 'YEAR',
@@ -25,6 +26,11 @@ const ResultTable = (props) => {
         id: 'plot',
         Header: 'PLOT',
         accessor: d => Object.values(d)[0]['plot']
+      },
+      {
+      id: 'combination',
+      Header: 'COMBINATION',
+      accessor: d => Object.values(d)[0]['combination']
       },
       {
         id: 'shortrains',

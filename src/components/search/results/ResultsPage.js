@@ -23,7 +23,8 @@ export default class PraisePage extends React.Component {
         error: '',
         errorObservation:'',
         years: [],
-        dataOptions: ["Select Rotation First"]
+        dataOptions: ["Select Rotation First"],
+        combination: []
       };
 
       this.handleChange = this.handleChange.bind(this);
@@ -118,6 +119,7 @@ export default class PraisePage extends React.Component {
     const phos = this.refs.phos.value
     const rep = this.refs.rep.value
     const observation = this.refs.obs.value
+    this.setState({combination: [res, rot, rep, nitro, phos]});
     if( observation === "..." || res === "..." || fym === "..." || rot === "..." ||
       nitro  === "..." || phos  === "..." || rep === "..." || this.state.errorObservation){
       error = true
@@ -165,7 +167,7 @@ export default class PraisePage extends React.Component {
 
               <div className='form-group'>
               <h3 className="text-group"> Select Combination </h3>
-                <label className='control-label col-sm-3'> RESIDUE </label>
+                <label className='control-label col-sm-2'> RESIDUE </label>
                 <div className='col-sm-3'>
                 <select
                   className="form-control select"
@@ -184,7 +186,7 @@ export default class PraisePage extends React.Component {
                 </div>
 
                 <div className='form-group'>
-                  <label className='control-label col-sm-2 '> ROTATION </label>
+                  <label className='control-label col-sm-1 '> ROTATION </label>
                   <div className='col-sm-3'>
                     <select
                       className="form-control select"
@@ -201,74 +203,68 @@ export default class PraisePage extends React.Component {
                       }
                     </select>
                   </div>
+                  <label className='control-label col-sm-1 '> REPETITION </label>
+                  <div className='col-sm-1'>
+                    <select
+                      className="form-control select"
+                      name="rep"
+                      ref="rep"
+                      value={this.state.editValues.rep}
+                      onChange={this.handleChange}
+                      style={{ width: '100px' }}
+                    >
+                      {
+                        ["...", "1", "2", "3", "4"].map(option => (
+                          <option key={option} value={option}>{option}</option>
+                        ))
+                      }
+                    </select>
+                  </div>
                 </div>
+
               </div>
 
 
 
               <div className='form-group'>
-                <label className='control-label col-sm-3 '> REPETITION </label>
-                <div className='col-sm-3'>
-                  <select
-                    className="form-control select"
-                    name="rep"
-                    ref="rep"
-                    value={this.state.editValues.rep}
-                    onChange={this.handleChange}
-                    style={{ width: '100px' }}
-                  >
-                    {
-                      ["...", "1", "2", "3", "4"].map(option => (
-                        <option key={option} value={option}>{option}</option>
-                      ))
-                    }
-                  </select>
-                </div>
-                <div className='form-group'>
-                  <label className='control-label col-sm-2 '> NITROGEN </label>
-                  <div className='col-sm-3'>
-                  <select
-                    className="form-control select"
-                    name="nitro"
-                    ref="nitro"
-                    value={this.state.editValues.nitro}
-                    onChange={this.handleChange}
-                    style={{ width: '100px' }}
-
-                  >
-                    {
-                      ["...", "N0", "N30", "N60", "N90"].map(option => (
-                        <option key={option} value={option}>{option}</option>
-                      ))
-                    }
-                  </select>
-                  </div>
-                </div>
-              </div>
-
-
-
-              <div className='form-group  '>
-                <label className='control-label col-sm-3 '> PHOSPHORUS </label>
+                <label className='control-label col-sm-2 '> NITROGEN </label>
                 <div className='col-sm-3'>
                 <select
                   className="form-control select"
-                  name="phos"
-                  ref="phos"
-                  value={this.state.editValues.phos}
+                  name="nitro"
+                  ref="nitro"
+                  value={this.state.editValues.nitro}
                   onChange={this.handleChange}
                   style={{ width: '100px' }}
+
                 >
                   {
-                    ["...", "P0", "P60"].map(option => (
+                    ["...", "N0", "N30", "N60", "N90"].map(option => (
                       <option key={option} value={option}>{option}</option>
                     ))
                   }
                 </select>
                 </div>
                 <div className='form-group'>
-                  <label className='control-label col-sm-2 '> FYM </label>
+                  <label className='control-label col-sm-1 '> PHOSPHATE </label>
                   <div className='col-sm-3'>
+                  <select
+                    className="form-control select"
+                    name="phos"
+                    ref="phos"
+                    value={this.state.editValues.phos}
+                    onChange={this.handleChange}
+                    style={{ width: '100px' }}
+                  >
+                    {
+                      ["...", "P0", "P60"].map(option => (
+                        <option key={option} value={option}>{option}</option>
+                      ))
+                    }
+                  </select>
+                  </div>
+                  <label className='control-label col-sm-1 '> FYM </label>
+                  <div className='col-sm-1'>
                   <select
                     className="form-control select"
                     name="fym"
@@ -284,7 +280,6 @@ export default class PraisePage extends React.Component {
                     }
                   </select>
                   </div>
-
                 </div>
               </div>
 
@@ -292,7 +287,7 @@ export default class PraisePage extends React.Component {
               <hr />
               <h3 className="text-group"> Select Observation </h3>
                 <div className='marg'>
-                  <div className='col-sm-6'>
+                  <div className='col-sm-4 obs'>
                   <select
                     className="form-control select"
                     name="obs"
@@ -339,8 +334,8 @@ export default class PraisePage extends React.Component {
               <hr/>
 
             {!this.state.searched &&
-            <div className='form-group marg'>
-              <div className='col-sm-3'>
+            <div className='form-group buttons'>
+              <div className='col-sm-2'>
               <input className='btn btn-success form-control'
                       name='edit'
                       type='button'
@@ -348,7 +343,7 @@ export default class PraisePage extends React.Component {
                       onClick={this.handleSearch}
                   />
               </div>
-              <div className='col-sm-3'>
+              <div className='col-sm-2'>
                   <input type='button'
                        name='cancel'
                        onClick={this.handleClear}
@@ -372,7 +367,7 @@ export default class PraisePage extends React.Component {
           {this.state.allResults.length > 0 ?
             <div>
             <ResultTable results={this.state.allResults.slice(2)} obs={this.refs.obs.value}
-                          years={this.state.years}/>
+                          years={this.state.years} combination={this.state.combination}/>
             </div>
             :
             <h3 className='error'>No results of the selected combination</h3>
