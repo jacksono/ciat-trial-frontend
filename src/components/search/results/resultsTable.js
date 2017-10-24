@@ -14,13 +14,25 @@ const ResultTable = (props) => {
         dataArray.push(data)
       }
 
-    })
-    dataArray.push({combintion:props.combintion})
-  
-    const columns = [{
+    });
+    console.log("rtable", Object.values(Object.values(props.results[0])[0]))
+    let combination = Object.values(Object.values(props.results[0])[0])
+
+    const columns = [
+      {
+      id: 'trial',
+      Header: 'TRIAL',
+      accessor: d => "INM3"
+      },
+      {
         id: 'year',
         Header: 'YEAR',
         accessor: d => Object.entries(d)[0][0].slice(7)
+      },
+      {
+      id: 'obs',
+      Header: 'OBSERVATION',
+      accessor: d => props.obs
       },
       {
         id: 'plot',
@@ -28,19 +40,35 @@ const ResultTable = (props) => {
         accessor: d => Object.values(d)[0]['plot']
       },
       {
-      id: 'combination',
-      Header: 'COMBINATION',
-      accessor: d => Object.values(d)[0]['combination']
+      id: 'rep',
+      Header: 'REPETITION',
+      accessor: d => combination[0]
       },
       {
+      id: 'rot',
+      Header: 'ROTATION',
+      accessor: d => combination[4]
+      },
+      {
+      id: 'fym',
+      Header: 'FYM',
+      accessor: d => combination[2]
+      },
+      {
+      id: 'np',
+      Header: 'N / P',
+      accessor: d => combination[1] + " / " + combination[3]
+      },
+
+      {
         id: 'shortrains',
-        Header: 'SHORT RAINS',
-        accessor: d => Object.values(d)[0][props.obs][0].toFixed(2)
+        Header: 'SR',
+        accessor: d => isNaN(Object.values(d)[0][props.obs][0]) ? Object.values(d)[0][props.obs][0] : Object.values(d)[0][props.obs][0].toFixed(2)
       },
       {
         id: 'longrains',
-        Header: 'LONG RAINS',
-        accessor: d => Object.values(d)[0][props.obs][1].toFixed(2)
+        Header: 'LR',
+        accessor: d => isNaN(Object.values(d)[0][props.obs][1]) ? Object.values(d)[0][props.obs][1] : Object.values(d)[0][props.obs][1].toFixed(2)
       }
     ];
 

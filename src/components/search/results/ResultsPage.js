@@ -10,11 +10,6 @@ export default class PraisePage extends React.Component {
       super(props);
       this.state = {
         editValues: {},
-        Results:{ MY:[],
-                      MAGB:[],
-                      TAGB:[],
-                      SY:[],
-                      SAGB:[]},
         allResults: [],
         plot_num:'',
         hasResults: false,
@@ -24,7 +19,6 @@ export default class PraisePage extends React.Component {
         errorObservation:'',
         years: [],
         dataOptions: ["Select Rotation First"],
-        combination: []
       };
 
       this.handleChange = this.handleChange.bind(this);
@@ -83,11 +77,6 @@ export default class PraisePage extends React.Component {
                                 year:'...',
                                 obs:'Select Rotation First',
                                 season:''},
-                    Results:{ MY:[],
-                                  MAGB:[],
-                                  TAGB:[],
-                                  SY:[],
-                                  SAGB:[]},
                       plot_num:'',
                       hasResults:false,
                       searched:false,
@@ -99,11 +88,7 @@ export default class PraisePage extends React.Component {
 
   handleSearch(event) {
     event.preventDefault()
-    this.setState({ Results:{ MY:[],
-                                  MAGB:[],
-                                  TAGB:[],
-                                  SY:[],
-                                  SAGB:[]},
+    this.setState({
                       plot_num:'',
                       hasResults:false,
                       allResults: [],
@@ -119,14 +104,13 @@ export default class PraisePage extends React.Component {
     const phos = this.refs.phos.value
     const rep = this.refs.rep.value
     const observation = this.refs.obs.value
-    this.setState({combination: [res, rot, rep, nitro, phos]});
     if( observation === "..." || res === "..." || fym === "..." || rot === "..." ||
       nitro  === "..." || phos  === "..." || rep === "..." || this.state.errorObservation){
       error = true
-      this.setState({ errorState: true,
-        error: 'ERROR: All selections are required'
+      this.setState({ error: 'ERROR: All selections are required'
       })
     }
+    console.log("makati", rep)
     if(!error){
     apiCall(null, 'get', 'results/combination?res='+res+'&f='+fym+'&n='+nitro+'&p='+phos+'&rep='+rep+'&rot='+rot)
     .then((response) => {
@@ -153,6 +137,7 @@ export default class PraisePage extends React.Component {
     this.setState({dataOptions : data })
   }
   render() {
+    console.log("hjkj", this.state)
     return (
         <div>
 
@@ -214,7 +199,7 @@ export default class PraisePage extends React.Component {
                       style={{ width: '100px' }}
                     >
                       {
-                        ["...", "1", "2", "3", "4"].map(option => (
+                        ["...", 1, 2, 3, 4].map(option => (
                           <option key={option} value={option}>{option}</option>
                         ))
                       }
@@ -223,8 +208,6 @@ export default class PraisePage extends React.Component {
                 </div>
 
               </div>
-
-
 
               <div className='form-group'>
                 <label className='control-label col-sm-2 '> NITROGEN </label>
@@ -364,10 +347,10 @@ export default class PraisePage extends React.Component {
 
           {(this.state.searched && !this.state.errorObservation) &&
           <div>
-          {this.state.allResults.length > 0 ?
+          {3 > 0 ?
             <div>
-            <ResultTable results={this.state.allResults.slice(2)} obs={this.refs.obs.value}
-                          years={this.state.years} combination={this.state.combination}/>
+            <ResultTable results={this.state.allResults.slice(1)} obs={this.refs.obs.value}
+                          years={this.state.years} />
             </div>
             :
             <h3 className='error'>No results of the selected combination</h3>
