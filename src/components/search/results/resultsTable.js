@@ -86,6 +86,17 @@ const ResultTable = (props) => {
                 showPageSizeOptions={false}
               />
               </div>
+              <div className='form-group buttons-next'>
+                <div className='col-sm-4'>
+                <input className='btn btn-success form-control'
+                        name='edit'
+                        type='button'
+                        value='SEARCH FOR ANOTHER COMBINATION'
+                        onClick={props.clear}
+                    />
+                </div>
+
+            </div>
           </div>
         </div>
 

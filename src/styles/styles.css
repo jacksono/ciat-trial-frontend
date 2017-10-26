@@ -212,3 +212,9 @@ input.btn-home:hover{
   left: 50%;
   transform: translateX(-15%);
 }
+.buttons-next{
+  margin-top: 20px;
+  position: relative;
+  left: 50%;
+  transform: translateX(-15%);
+}

@@ -136,7 +136,7 @@ export default class ResultsPage extends React.Component {
     this.setState({dataOptions : data })
   }
   render() {
-    console.log("hjkj", this.state)
+    console.log("STATE", this.state)
     return (
         <div>
 
@@ -286,7 +286,7 @@ export default class ResultsPage extends React.Component {
 
                 <div className='form-group'>
                   <label className='control-label col-sm-2 text-group'> Select Years </label>
-                  <div className='col-sm-3'>
+                  <div className='col-sm-1'>
                   <select className="selectpicker"
                           multiple
                           onChange={this.select}
@@ -343,7 +343,7 @@ export default class ResultsPage extends React.Component {
           {this.state.allResults.length > 0 ?
             <div>
             <ResultTable results={this.state.allResults.slice(1)} obs={this.refs.obs.value}
-                          years={this.state.years} />
+                          years={this.state.years} clear={this.handleClear}/>
             </div>
             :
             <h3 className='error'>No results of the selected combination</h3>
