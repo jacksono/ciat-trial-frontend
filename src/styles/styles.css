@@ -1,9 +1,7 @@
 #app {
   font: 14px 'Helvetica Neue', Helvetica, Arial, sans-serif;
   color: #4d4d4d;
-  min-width: 550px;
-  max-width: 850px;
-  margin: 0 auto
+
 }
 a.active {
   color: white;
@@ -14,7 +12,7 @@ a.active {
 .jumbo{
   margin: 20px;
   height: 80px;
-  width: 800px;
+
   background-color: #15983A;
 }
 
@@ -177,6 +175,7 @@ input.btn-home:hover{
 .select{
   text-align-last:center;
   font-size: 7px;
+
 }
 .error{
   color: red;
@@ -203,3 +202,39 @@ input.btn-home:hover{
     border-right: 1px solid rgba(0,0,0,0.02);
     font-size: 20px;
 }
+.obs{
+  position: relative;
+  left: 50%;
+  transform: translateX(-95%);
+}
+
+.buttons-next{
+  margin-top: 20px;
+}
+.select-category-header{
+  text-align-last:center;
+  text-align: center;
+  margin-top: 10px;
+  padding-top: 10px;
+  padding-bottom: 3px;
+  font-size: 30px !important;
+  font-weight: bold;
+  width: 400px !important;
+  height: 45px !important;
+  background: white;
+  border-radius: 8px !important;
+  border: 3px solid #15983A !important;
+}
+.marg-center{
+  margin-left: 450px;
+}
+.modal-center{
+  margin-left: 60px;
+}
+
+div.modal-footer {
+    padding: 26px;
+    text-align: center;
+    margin-left: -14px;
+    border-top: 0px solid #e5e5e5;
+  }
