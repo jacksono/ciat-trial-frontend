@@ -30,6 +30,9 @@ export default class ResultsPage extends React.Component {
 
     }
 
+  componentDidMount(){
+    $('.selectpicker').selectpicker();
+    }
 
   select(event){
     let targets = [];
@@ -156,11 +159,11 @@ export default class ResultsPage extends React.Component {
     }
     this.setState({dataOptions : data })
   }
+
   render() {
     console.log("STATE", this.state)
     return (
         <div>
-
         <form className='form-horizontal'>
             <div className='form-group'>
               <select
@@ -178,7 +181,7 @@ export default class ResultsPage extends React.Component {
                 }
               </select>
               </div>
-            {this.state.editValues.trial === "INM3" ?
+            { 1 ===1  ?
             <div className='table-div' >
 
               <div className='form-group'>
