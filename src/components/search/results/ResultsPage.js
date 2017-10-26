@@ -26,6 +26,7 @@ export default class ResultsPage extends React.Component {
       this.handleClear = this.handleClear.bind(this);
       this.select = this.select.bind(this);
       this.getOptions = this.getOptions.bind(this);
+      this.nextSearch = this.nextSearch.bind(this);
 
     }
 
@@ -77,6 +78,26 @@ export default class ResultsPage extends React.Component {
                                 year:'...',
                                 obs:'Select Rotation First',
                                 season:''},
+                      plot_num:'',
+                      hasResults:false,
+                      searched:false,
+                      error : '',
+                      errorObservation:''
+
+                    });
+                  }
+
+  nextSearch() {
+    this.setState({ editValues:{rep:'...',
+                                rot:'...',
+                                fym:'...',
+                                nitro:'...',
+                                phos:'...',
+                                res:'...',
+                                year:'...',
+                                obs:'Select Rotation First',
+                                season:'',
+                                trial:"INM3"},
                       plot_num:'',
                       hasResults:false,
                       searched:false,
@@ -142,11 +163,22 @@ export default class ResultsPage extends React.Component {
 
         <form className='form-horizontal'>
             <div className='form-group'>
-              <header className="category-header">
-                INM
-              </header>
-            </div>
-
+              <select
+                className="form-control select-category-header marg-center"
+                ref="trial"
+                name="trial"
+                value={this.state.editValues.trial}
+                onChange={this.handleChange}
+                style={{ width: '100px' }}
+              >
+                {
+                  ["-- select trial --", "INM3", "Other"].map(option => (
+                    <option key={option} value={option}>{option}</option>
+                  ))
+                }
+              </select>
+              </div>
+            {this.state.editValues.trial === "INM3" ?
             <div className='table-div' >
 
               <div className='form-group'>
@@ -311,7 +343,7 @@ export default class ResultsPage extends React.Component {
 
             {!this.state.searched &&
             <div className='form-group buttons'>
-              <div className='col-sm-2'>
+              <div className='col-sm-2 marg-center'>
               <input className='btn btn-success form-control'
                       name='edit'
                       type='button'
@@ -343,7 +375,7 @@ export default class ResultsPage extends React.Component {
           {this.state.allResults.length > 0 ?
             <div>
             <ResultTable results={this.state.allResults.slice(1)} obs={this.refs.obs.value}
-                          years={this.state.years} clear={this.handleClear}/>
+                          years={this.state.years} clear={this.nextSearch}/>
             </div>
             :
             <h3 className='error'>No results of the selected combination</h3>
@@ -353,6 +385,7 @@ export default class ResultsPage extends React.Component {
 
 
         </div>
+        : this.state.editValues.trial !== "Other" ? "" : <h3 className=" error category-header"> No data for that trial yet</h3> }
 
         </form>
         </div>

@@ -207,14 +207,24 @@ input.btn-home:hover{
   left: 50%;
   transform: translateX(-95%);
 }
-.buttons{
-  position: relative;
-  left: 50%;
-  transform: translateX(-15%);
-}
+
 .buttons-next{
   margin-top: 20px;
-  position: relative;
-  left: 50%;
-  transform: translateX(-15%);
+}
+.select-category-header{
+  text-align-last:center;
+  text-align: center;
+  margin-top: 10px;
+  padding-top: 10px;
+  padding-bottom: 3px;
+  font-size: 30px !important;
+  font-weight: bold;
+  width: 400px !important;
+  height: 45px !important;
+  background: white;
+  border-radius: 8px !important;
+  border: 3px solid #15983A !important;
+}
+.marg-center{
+  margin-left: 450px;
 }

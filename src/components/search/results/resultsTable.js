@@ -87,7 +87,7 @@ const ResultTable = (props) => {
               />
               </div>
               <div className='form-group buttons-next'>
-                <div className='col-sm-4'>
+                <div className='col-sm-3 marg-center'>
                 <input className='btn btn-success form-control'
                         name='edit'
                         type='button'
