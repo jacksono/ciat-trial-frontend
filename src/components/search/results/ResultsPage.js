@@ -5,7 +5,7 @@ import { Table } from 'reactstrap';
 import apiCall from './apiHelper';
 import ResultTable from './resultsTable';
 
-export default class PraisePage extends React.Component {
+export default class ResultsPage extends React.Component {
   constructor(props) {
       super(props);
       this.state = {
@@ -110,7 +110,6 @@ export default class PraisePage extends React.Component {
       this.setState({ error: 'ERROR: All selections are required'
       })
     }
-    console.log("makati", rep)
     if(!error){
     apiCall(null, 'get', 'results/combination?res='+res+'&f='+fym+'&n='+nitro+'&p='+phos+'&rep='+rep+'&rot='+rot)
     .then((response) => {
@@ -266,54 +265,48 @@ export default class PraisePage extends React.Component {
                 </div>
               </div>
 
-              <div className="form-group  ">
-              <hr />
-              <h3 className="text-group"> Select Observation </h3>
-                <div className='marg'>
-                  <div className='col-sm-4 obs'>
-                  <select
-                    className="form-control select"
-                    name="obs"
-                    ref="obs"
-                    value={this.state.editValues.obs}
-                    onChange={this.handleChange}
+              <div className='form-group'>
+                <hr />
+                <label className='control-label col-sm-3 text-group'> Select Observation </label>
+                <div className='col-sm-3'>
+                <select
+                  className="form-control select"
+                  name="obs"
+                  ref="obs"
+                  value={this.state.editValues.obs}
+                  onChange={this.handleChange}
+                >
+                  {
+                    this.state.dataOptions.map(option => (
+                      <option key={option} value={option}>{option}</option>
+                    ))
+                  }
+                </select>
+                </div>
+
+                <div className='form-group'>
+                  <label className='control-label col-sm-2 text-group'> Select Years </label>
+                  <div className='col-sm-3'>
+                  <select className="selectpicker"
+                          multiple
+                          onChange={this.select}
+                          data-none-selected-text='All years'
+                          data-actions-box='true'
+                          data-header='Years'
+
                   >
-                    {
-                      this.state.dataOptions.map(option => (
-                        <option key={option} value={option}>{option}</option>
-                      ))
-                    }
+                  {
+                    ["2004", "2005", "2006", "2007",
+                     "2008", "2009", "2010", "2011", "2012", "2013",
+                     "2014", "2015"].map(option => (
+                      <option key={option} value={option}>{option}</option>
+                    ))
+                  }
                   </select>
                   </div>
-
                 </div>
               </div>
-              {
-                this.state.errorObservation &&
-                <div className='error'>
-                  <h4>{this.state.errorObservation}</h4>
-                </div>
-              }
-              <hr />
 
-              <h3 className="text-group"> Select Years </h3>
-
-              <select className="selectpicker"
-                      multiple
-                      onChange={this.select}
-                      data-none-selected-text='All years'
-                      data-actions-box='true'
-                      data-header='Years'
-
-              >
-              {
-                ["2004", "2005", "2006", "2007",
-                 "2008", "2009", "2010", "2011", "2012", "2013",
-                 "2014", "2015"].map(option => (
-                  <option key={option} value={option}>{option}</option>
-                ))
-              }
-              </select>
               <hr/>
 
             {!this.state.searched &&
@@ -347,7 +340,7 @@ export default class PraisePage extends React.Component {
 
           {(this.state.searched && !this.state.errorObservation) &&
           <div>
-          {3 > 0 ?
+          {this.state.allResults.length > 0 ?
             <div>
             <ResultTable results={this.state.allResults.slice(1)} obs={this.refs.obs.value}
                           years={this.state.years} />

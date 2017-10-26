@@ -77,7 +77,7 @@ const ResultTable = (props) => {
         <div className="">
           <div className="">
               <div>
-                <h3>Results For {props.obs} </h3>
+                <h3>Results</h3>
               <ReactTable
                 className="-striped -highlight"
                 data={dataArray}
