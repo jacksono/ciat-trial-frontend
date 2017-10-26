@@ -189,7 +189,7 @@ export default class ResultsPage extends React.Component {
                 style={{ width: '100px' }}
               >
                 {
-                  ["-- select trial --", "INM3", "Other"].map(option => (
+                  ["INM3", "Other"].map(option => (
                     <option key={option} value={option}>{option}</option>
                   ))
                 }
@@ -202,7 +202,7 @@ export default class ResultsPage extends React.Component {
               </ModalBody>
               </Modal>
 
-            { this.state.editValues.trial === "INM3"  ?
+            { this.state.editValues.trial !== "Other"  ?
             <div className='table-div' >
               <div className='form-group'>
               <h3 className="text-group"> Select Combination </h3>
@@ -408,7 +408,7 @@ export default class ResultsPage extends React.Component {
 
 
         </div>
-        : this.state.editValues.trial !== "Other" ? "" : <h3 className=" error category-header"> No data for that trial yet</h3> }
+        : <h3 className=" error category-header"> No data for that trial yet</h3> }
 
         </form>
         </div>
