@@ -14,11 +14,7 @@ app.get('*', function(req, res) {
   res.sendFile(path.join( __dirname, '../dist/index.html'));
 });
 
-<<<<<<< HEAD
 app.listen(process.env.PORT || 8080)
-=======
-app.listen(process.env.PORT || 5000)
->>>>>>> 3b4096ceef8854d714bbdbbf6d44667fc6aea044
 // app.listen(port, function(err) {
 //   if (err) {
 //     console.log(err);
