@@ -1,7 +1,7 @@
 {
   "name": "INM",
   "version": "1.0.0",
-  "description": "Worship Song Project by JXN",
+  "description": "CIAT",
   "scripts": {
     "prestart": "babel-node tools/startMessage.js",
     "start": "npm-run-all --parallel test:watch open:src",
@@ -13,7 +13,7 @@
     "build:html": "babel-node tools/buildHtml.js",
     "prebuild": "npm-run-all clean-dist test build:html",
     "build": "babel-node tools/build.js",
-    "postbuild": "babel-node tools/srcServer.js"
+    "postbuild": "babel-node tools/distServer.js"
   },
   "author": "JXN",
   "license": "MIT",

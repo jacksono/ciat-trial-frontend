@@ -15,9 +15,9 @@ const ResultTable = (props) => {
       }
 
     });
-    console.log("rtable", Object.values(Object.values(props.results[0])[0]))
-    let combination = Object.values(Object.values(props.results[0])[0])
 
+    let combination = Object.values(Object.values(props.results[0])[0])
+      console.log("rtable", combination)
     const columns = [
       {
       id: 'trial',
@@ -40,9 +40,14 @@ const ResultTable = (props) => {
         accessor: d => Object.values(d)[0]['plot']
       },
       {
+      id: 'res',
+      Header: 'RESIDUE',
+      accessor: d => combination[3]
+      },
+      {
       id: 'rep',
       Header: 'REPETITION',
-      accessor: d => combination[0]
+      accessor: d => combination[1]
       },
       {
       id: 'rot',
@@ -52,12 +57,12 @@ const ResultTable = (props) => {
       {
       id: 'fym',
       Header: 'FYM',
-      accessor: d => combination[2]
+      accessor: d => combination[5]
       },
       {
       id: 'np',
       Header: 'N / P',
-      accessor: d => combination[1] + " / " + combination[3]
+      accessor: d => combination[0] + " / " + combination[2]
       },
 
       {

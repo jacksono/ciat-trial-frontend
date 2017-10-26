@@ -176,7 +176,6 @@ export default class ResultsPage extends React.Component {
   }
 
   render() {
-    console.log("STATE", this.state)
     return (
         <div>
         <form className='form-horizontal'>
