@@ -151,9 +151,12 @@ export default class ResultsPage extends React.Component {
     .then((response) => {
       this.setState({searched: true})
       if(response){
-        const resp = response[0]["Results"+2004]
+        if(response.message){
+          this.setState({showModal: false});
+        }
+        else{
         this.setState({hasResults: true, allResults: response, showModal: false});
-      }
+      }}
       }).catch(error => (error));
       }
     }
