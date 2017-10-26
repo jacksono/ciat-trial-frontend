@@ -4,6 +4,7 @@ import {Link, IndexLink} from 'react-router';
 import { Table } from 'reactstrap';
 import apiCall from './apiHelper';
 import ResultTable from './resultsTable';
+import { Modal, ModalHeader, ModalBody, ModalFooter } from 'react-bootstrap';
 
 export default class ResultsPage extends React.Component {
   constructor(props) {
@@ -19,6 +20,7 @@ export default class ResultsPage extends React.Component {
         errorObservation:'',
         years: [],
         dataOptions: ["Select Rotation First"],
+        showModal: false
       };
 
       this.handleChange = this.handleChange.bind(this);
@@ -27,6 +29,7 @@ export default class ResultsPage extends React.Component {
       this.select = this.select.bind(this);
       this.getOptions = this.getOptions.bind(this);
       this.nextSearch = this.nextSearch.bind(this);
+      this.toggle = this.toggle.bind(this);
 
     }
 
@@ -41,6 +44,12 @@ export default class ResultsPage extends React.Component {
     });
     this.setState({years: targets})
   }
+
+  toggle() {
+  this.setState({
+    showModal: !this.state.showModal
+  });
+}
 
   handleChange(event) {
     const { name, value } = event.target;
@@ -68,6 +77,8 @@ export default class ResultsPage extends React.Component {
 
     this.setState({
       editValues: Object.assign({}, this.state.editValues, { [name]: value }),
+    }, function(){
+        $('.selectpicker').selectpicker();
     });
   }
 
@@ -135,12 +146,13 @@ export default class ResultsPage extends React.Component {
       })
     }
     if(!error){
+      this.setState({showModal: true})
     apiCall(null, 'get', 'results/combination?res='+res+'&f='+fym+'&n='+nitro+'&p='+phos+'&rep='+rep+'&rot='+rot)
     .then((response) => {
       this.setState({searched: true})
       if(response){
         const resp = response[0]["Results"+2004]
-        this.setState({hasResults: true, allResults: response});
+        this.setState({hasResults: true, allResults: response, showModal: false});
       }
       }).catch(error => (error));
       }
@@ -181,9 +193,15 @@ export default class ResultsPage extends React.Component {
                 }
               </select>
               </div>
-            { 1 ===1  ?
-            <div className='table-div' >
+              <Modal show={this.state.showModal} toggle={this.toggle} className="">
+              <ModalFooter toggle={this.toggle}><h3 className="text-group" >Loading Results... </h3></ModalFooter>
+              <ModalBody>
+              <img className="modal-center" src="https://upload.wikimedia.org/wikipedia/commons/b/b1/Loading_icon.gif"/>
+              </ModalBody>
+              </Modal>
 
+            { this.state.editValues.trial === "INM3"  ?
+            <div className='table-div' >
               <div className='form-group'>
               <h3 className="text-group"> Select Combination </h3>
                 <label className='control-label col-sm-2'> RESIDUE </label>

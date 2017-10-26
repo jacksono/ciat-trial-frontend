@@ -228,3 +228,13 @@ input.btn-home:hover{
 .marg-center{
   margin-left: 450px;
 }
+.modal-center{
+  margin-left: 60px;
+}
+
+div.modal-footer {
+    padding: 26px;
+    text-align: center;
+    margin-left: -14px;
+    border-top: 0px solid #e5e5e5;
+  }
