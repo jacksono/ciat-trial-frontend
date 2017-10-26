@@ -226,7 +226,9 @@ input.btn-home:hover{
   border: 3px solid #15983A !important;
 }
 .marg-center{
-  margin-left: 450px;
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
 }
 .modal-center{
   margin-left: 60px;
@@ -237,4 +239,9 @@ div.modal-footer {
     text-align: center;
     margin-left: -14px;
     border-top: 0px solid #e5e5e5;
+  }
+  .buttons {
+    position: relative;
+    left: 50%;
+    transform: translateX(-58%);
   }

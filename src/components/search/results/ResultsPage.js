@@ -374,7 +374,7 @@ export default class ResultsPage extends React.Component {
                       onClick={this.handleSearch}
                   />
               </div>
-              <div className='col-sm-2'>
+              <div className='col-sm-2 marg-center'>
                   <input type='button'
                        name='cancel'
                        onClick={this.handleClear}
